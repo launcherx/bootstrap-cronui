@@ -15,6 +15,7 @@ Default plugin options:
   2. dropDownClass: 'form-control',
   3. dropDownSizeClass: 'col-md-2',
   4. resultOutputId: 'result_out'
+  5. lang: 'en'
 ```
 
 Set Value
