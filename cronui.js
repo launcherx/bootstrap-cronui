@@ -15,7 +15,7 @@
         dropDownClass: 'form-control',
         dropDownSizeClass: 'col-md-2',
         resultOutputId: 'result_out',
-        lang: 'ru'
+        lang: 'en'
     };
 
     /** Cron combinations for detecting cron type */
