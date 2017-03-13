@@ -3,8 +3,6 @@ Plugin for generating cron string
 
 ## Plugin usage
 
-#code
-
 Init crunui
 
 ```javascript
