@@ -1,3 +1,10 @@
+/**
+ * @file jquery.cronui.js
+ * @brief jQuery plugin to generate cron string
+ * @author Imants Cernovs <imantscernovs@inbox.lv>
+ * @version 1.0.0
+ */
+
 (function($) {
 
     var $select_box = [];
@@ -7,43 +14,9 @@
         initial : '* * * * *',
         dropDownClass: 'form-control',
         dropDownSizeClass: 'col-md-2',
-        resultOutputId: 'result_out'
+        resultOutputId: 'result_out',
+        lang: 'ru'
     };
-
-    var $periods = [
-        { text: 'Minute', val: 'minute' },
-        { text: 'Hour',   val: 'hour'   },
-        { text: 'Day',    val: 'day'    },
-        { text: 'Week',   val: 'week'   },
-        { text: 'Month',  val: 'month'  },
-        { text: 'Year',   val: 'year'   }
-    ];
-
-
-    var $days = [
-        { text: 'Monday',    val: '1' },
-        { text: 'Tuesday',   val: '2' },
-        { text: 'Wednesday', val: '3' },
-        { text: 'Thursday',  val: '4' },
-        { text: 'Friday',    val: '5' },
-        { text: 'Saturday',  val: '6' },
-        { text: 'Sunday',    val: '7' }
-    ];
-
-    var $months = [
-        { text: 'January',   val: '1' },
-        { text: 'February',  val: '2' },
-        { text: 'March',     val: '3' },
-        { text: 'April',     val: '4' },
-        { text: 'May',       val: '5' },
-        { text: 'June',      val: '6' },
-        { text: 'July',      val: '7' },
-        { text: 'August',    val: '8' },
-        { text: 'September', val: '9' },
-        { text: 'October',   val: '10' },
-        { text: 'Novermber', val: '11' },
-        { text: 'December',  val: '12' }
-    ];
 
     /** Cron combinations for detecting cron type */
     var combinations = {
@@ -64,47 +37,47 @@
             /** Generate inputs */
             $select_box['period'] =
                 $('<div/>', {class: 'cron-period ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: 'Every'}))
+                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['period']}))
                     .append($('<select/>', {id: 'period-box', class: 'cron-period-box ' + $settings.dropDownClass}))
                     .appendTo(this);
 
             $select_box['minute'] =
                 $('<div/>', {class: 'cron-select cron-min ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: 'Minute'}))
+                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['minute']}))
                     .append($('<select/>', {id: 'min-box', class: 'cron-min-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['hour'] =
                 $('<div/>', {class: 'cron-select cron-hour ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: 'Hour'}))
+                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['hour']}))
                     .append($('<select/>', {id: 'hour-box', class: 'cron-hour-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['month'] =
                 $('<div/>', {class: 'cron-select cron-month ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: 'Month'}))
+                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['month']}))
                     .append($('<select/>', {id: 'month-box', class: 'cron-month-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['dom'] =
                 $('<div/>', {class: 'cron-select cron-dom ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: 'Day of month'}))
+                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['dom']}))
                     .append($('<select/>', {id: 'dom-box', class: 'cron-dom-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['dow'] =
                 $('<div/>', {class: 'cron-select cron-dow ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: 'Day of week'}))
+                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['dow']}))
                     .append($('<select/>', {id: 'dow-box', class: 'cron-dow-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             /** Populate selects with data*/
-            populateOptions($select_box['period'].find('select').attr('id'), $periods);
+            populateOptions($select_box['period'].find('select').attr('id'), generatePeriods());
             populateOptions($select_box['minute'].find('select').attr('id'), generateNumbers(60));
             populateOptions($select_box['hour'].find('select').attr('id'), generateNumbers(24));
-            populateOptions($select_box['month'].find('select').attr('id'), $months);
+            populateOptions($select_box['month'].find('select').attr('id'), generateData('months'));
             populateOptions($select_box['dom'].find('select').attr('id'), generateMonthDays());
-            populateOptions($select_box['dow'].find('select').attr('id'), $days);
+            populateOptions($select_box['dow'].find('select').attr('id'), generateData('days'));
 
             /** Activate inputs based on choosen period */
             $('select.cron-period-box').change(function () {
@@ -120,6 +93,8 @@
             methods['setValue'].call(this, $settings.initial);
 
             $('#' + $settings.resultOutputId).val(methods['getValue'].call());
+
+            return this;
 
         },
 
@@ -243,6 +218,50 @@
     };
 
     /**
+     * Generate translated data
+     *
+     * @param  {string} $element
+     * @return {Array}
+     */
+    var generateData = function ($element) {
+        var $data_array = [];
+
+        try {
+            var $items = data[$settings.lang][$element];
+
+            for (var $i = 1; $i <= $items.length; $i++) {
+                $data_array.push({val: $i, text: $items[$i - 1]})
+            }
+
+        } catch (e) {
+            console.error('Translation for ' + $element +' does not exists in cronui-' + $settings.lang);
+        }
+
+        return $data_array;
+    };
+
+    /**
+     * Generate translated periods
+     *
+     * @return {Array}
+     */
+    var generatePeriods = function () {
+        var $data_array = [];
+        var $values     = ['minute', 'hour', 'day', 'week', 'month', 'year'];
+
+        try {
+            var $items = data[$settings.lang]['periods'];
+            $.each($values, function (index, value) {
+                $data_array.push({val: value, text: $items[index]});
+            })
+        } catch (e) {
+            console.error('Translation for periods does not exists in cronui-' + $settings.lang);
+        }
+
+        return $data_array;
+    };
+
+    /**
      * Validate cron string correctness
      *
      * @param cron_str
@@ -320,7 +339,22 @@
         } else if (typeof method === 'object' || ! method) {
             return methods.init.apply(this, arguments);
         } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.cron' );
+            $.error( 'Method ' +  method + ' does not exist' );
+        }
+    };
+
+    /** Default plugin text */
+    var data = $.fn.cronui.data = {
+        en: {
+            periods: ['Minute', 'Hour', 'Day', 'Week', 'Month', 'Year'],
+            days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novermber', 'December'],
+            period: 'Every',
+            minute: 'Minute',
+            hour: 'Hour',
+            month: 'Month',
+            dom: 'Day of month',
+            dow: 'Day of week'
         }
     };
 
