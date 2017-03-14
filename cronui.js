@@ -32,42 +32,44 @@
     var methods = {
         init : function(options) {
 
-            $settings   = $.extend({}, defaults, options);
+            $settings = $.extend({}, defaults, options);
+            /** Set default fallback language */
+            $settings.lang = data.hasOwnProperty($settings.lang) ? $settings.lang : 'en';
 
             /** Generate inputs */
             $select_box['period'] =
                 $('<div/>', {class: 'cron-period ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['period']}))
+                    .append($('<label/>', {text: data[$settings.lang]['period']}))
                     .append($('<select/>', {id: 'period-box', class: 'cron-period-box ' + $settings.dropDownClass}))
                     .appendTo(this);
 
             $select_box['minute'] =
                 $('<div/>', {class: 'cron-select cron-min ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['minute']}))
+                    .append($('<label/>', {text: data[$settings.lang]['minute']}))
                     .append($('<select/>', {id: 'min-box', class: 'cron-min-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['hour'] =
                 $('<div/>', {class: 'cron-select cron-hour ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['hour']}))
+                    .append($('<label/>', {text: data[$settings.lang]['hour']}))
                     .append($('<select/>', {id: 'hour-box', class: 'cron-hour-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['month'] =
                 $('<div/>', {class: 'cron-select cron-month ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['month']}))
+                    .append($('<label/>', {text: data[$settings.lang]['month']}))
                     .append($('<select/>', {id: 'month-box', class: 'cron-month-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['dom'] =
                 $('<div/>', {class: 'cron-select cron-dom ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['dom']}))
+                    .append($('<label/>', {text: data[$settings.lang]['dom']}))
                     .append($('<select/>', {id: 'dom-box', class: 'cron-dom-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
             $select_box['dow'] =
                 $('<div/>', {class: 'cron-select cron-dow ' + $settings.dropDownSizeClass})
-                    .append($('<label/>', {class: 'control-label', text: data[$settings.lang]['dow']}))
+                    .append($('<label/>', {text: data[$settings.lang]['dow']}))
                     .append($('<select/>', {id: 'dow-box', class: 'cron-dow-box ' + $settings.dropDownClass, disabled: true}))
                     .appendTo(this);
 
@@ -345,7 +347,7 @@
 
     /** Default plugin text */
     var data = $.fn.cronui.data = {
-        en: {
+        'en': {
             periods: ['Minute', 'Hour', 'Day', 'Week', 'Month', 'Year'],
             days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
             months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novermber', 'December'],
