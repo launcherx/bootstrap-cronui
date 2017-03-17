@@ -45,7 +45,7 @@
             if ($settings.dropDownStyled) {
                 if (typeof $.fn.selectpicker != typeof undefined) {
 
-                    $dropDownFlat = ($settings.dropDownStyledFlat) ? 'btn-flat' : '';
+                    var $dropDownFlat = ($settings.dropDownStyledFlat) ? 'btn-flat' : '';
 
                     $(document).ready(function () {
                         $('.multiple-cron').selectpicker({
@@ -175,27 +175,27 @@
 
             switch ($period) {
                 case 'hour':
-                    min = ($min_val != null) ? $min_val : min;
+                    min = ($min_val != null) ? $min_val : '0';
                 break;
                 case 'day':
-                    min  = ($min_val != null) ? $min_val : min;
-                    hour = ($hour_val != null) ? $hour_val : hour;
+                    min  = ($min_val != null)  ? $min_val  : '0';
+                    hour = ($hour_val != null) ? $hour_val : '0';
                 break;
                 case 'week':
-                    min  = ($min_val != null) ? $min_val : min;
-                    hour = ($hour_val != null) ? $hour_val : hour;
-                    dow  = ($dow_val != null) ? $dow_val : dow;
+                    min  = ($min_val != null)  ? $min_val  : '0';
+                    hour = ($hour_val != null) ? $hour_val : '0';
+                    dow  = ($dow_val != null)  ? $dow_val  : '0';
                 break;
                 case 'month':
-                    min  = ($min_val != null) ? $min_val : min;
-                    hour = ($hour_val != null) ? $hour_val : hour;
-                    day  = ($day_val != null) ? $day_val : day;
+                    min  = ($min_val != null)  ? $min_val  : '0';
+                    hour = ($hour_val != null) ? $hour_val : '0';
+                    day  = ($day_val != null)  ? $day_val  : '1';
                 break;
                 case 'year':
-                    min   = ($min_val != null) ? $min_val : min;
-                    hour  = ($hour_val != null) ? $hour_val : hour;
-                    day   = ($day_val != null) ? $day_val : day;
-                    month = ($month_val != null) ? $month_val : month;
+                    min   = ($min_val != null)   ? $min_val   : '0';
+                    hour  = ($hour_val != null)  ? $hour_val  : '0';
+                    day   = ($day_val != null)   ? $day_val   : '1';
+                    month = ($month_val != null) ? $month_val : '1';
                 break;
             }
 
