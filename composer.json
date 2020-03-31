@@ -1,7 +1,6 @@
 {
   "name": "launcherx/bootstrap-cronui",
   "description": "The jQuery plugin for generating cron string",
-  "version": "2.0.0",
   "keywords": [
     "bootstrap",
     "cron",
