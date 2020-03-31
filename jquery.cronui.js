@@ -175,27 +175,27 @@
 
             switch ($period) {
                 case 'hour':
-                    min = ($min_val != null) ? $min_val : '0';
+                    min = ($min_val.length > 0) ? $min_val : '0';
                 break;
                 case 'day':
-                    min  = ($min_val != null)  ? $min_val  : '0';
-                    hour = ($hour_val != null) ? $hour_val : '0';
+                    min  = ($min_val.length  > 0) ? $min_val  : '0';
+                    hour = ($hour_val.length > 0) ? $hour_val : '0';
                 break;
                 case 'week':
-                    min  = ($min_val != null)  ? $min_val  : '0';
-                    hour = ($hour_val != null) ? $hour_val : '0';
-                    dow  = ($dow_val != null)  ? $dow_val  : '0';
+                    min  = ($min_val.length  > 0) ? $min_val  : '0';
+                    hour = ($hour_val.length > 0) ? $hour_val : '0';
+                    dow  = ($dow_val.length  > 0) ? $dow_val  : '0';
                 break;
                 case 'month':
-                    min  = ($min_val != null)  ? $min_val  : '0';
-                    hour = ($hour_val != null) ? $hour_val : '0';
-                    day  = ($day_val != null)  ? $day_val  : '1';
+                    min  = ($min_val.length  > 0) ? $min_val  : '0';
+                    hour = ($hour_val.length > 0) ? $hour_val : '0';
+                    day  = ($day_val.length  > 0) ? $day_val  : '1';
                 break;
                 case 'year':
-                    min   = ($min_val != null)   ? $min_val   : '0';
-                    hour  = ($hour_val != null)  ? $hour_val  : '0';
-                    day   = ($day_val != null)   ? $day_val   : '1';
-                    month = ($month_val != null) ? $month_val : '1';
+                    min   = ($min_val.length   > 0) ? $min_val   : '0';
+                    hour  = ($hour_val.length  > 0) ? $hour_val  : '0';
+                    day   = ($day_val.length   > 0) ? $day_val   : '1';
+                    month = ($month_val.length > 0) ? $month_val : '1';
                 break;
             }
 
