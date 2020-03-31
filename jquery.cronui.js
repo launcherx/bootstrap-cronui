@@ -1,8 +1,8 @@
 /**
  * @file jquery.cronui.js
- * @brief jQuery plugin to generate cron string
- * @author Imants Cernovs <imantscernovs@inbox.lv>
- * @version 1.0.2
+ * @brief The jQuery plugin for generating cron string
+ * @author Imants Cernovs <imantscernovs@live.com>
+ * @version 2.0.0
  */
 
 (function($) {
@@ -43,7 +43,7 @@
 
             /** Init styled dropdowns */
             if ($settings.dropDownStyled) {
-                if (typeof $.fn.selectpicker != typeof undefined) {
+                if (typeof $.fn.selectpicker !== typeof undefined) {
 
                     var $dropDownFlat = ($settings.dropDownStyledFlat) ? 'btn-flat' : '';
 
@@ -145,7 +145,7 @@
             $.each($values, function (value, index) {
 
                 /** Skip asterisk */
-                if (index == '*') return;
+                if (index === '*') return;
 
                 /** Set single cron value */
                 $select_box[value].find('select').val(index);
@@ -329,7 +329,7 @@
         } else {
             /** check actual cron values */
             $.each(cron, function (index, str) {
-                if (str == '*') return;
+                if (str === '*') return;
 
                 var $cron_val = (str.includes(',')) ? str.split(',') : parseInt(str);
 
@@ -349,7 +349,7 @@
         }
 
         /** Show error message in alert box */
-        if ($valid == false) {
+        if ($valid === false) {
             alert($error);
             return false;
         }

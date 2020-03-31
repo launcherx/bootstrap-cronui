@@ -1,0 +1,25 @@
+{
+  "name": "launcherx/bootstrap-cronui",
+  "description": "The jQuery plugin for generating cron string",
+  "version": "2.0.0",
+  "keywords": [
+    "bootstrap",
+    "cron",
+    "cronui",
+    "form",
+    "jquery",
+    "plugin"
+  ],
+  "authors": [
+    {
+      "name": "Imants Cernovs",
+      "email": "imantscernovs@live.com"
+    }
+  ],
+  "license": "MIT",
+  "suggest": {
+    "components/jquery": "1.9.1 - 3",
+    "twbs/bootstrap": ">=4.0.0",
+    "snapappointments/bootstrap-select": ">=1.13"
+  }
+}
